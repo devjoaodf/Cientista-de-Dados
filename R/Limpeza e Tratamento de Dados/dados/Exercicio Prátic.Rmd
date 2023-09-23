@@ -1,0 +1,82 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+dados = read.csv("tempo.csv", sep = ";", na.strings = "", stringsAsFactors = T)
+head(dados)
+summary(dados)
+```
+```{r}
+#temperatura
+counts = table(dados$Temperatura)
+barplot(counts, main="Temperatura", xlab="Temperatura")
+#umidade
+counts = table(dados$Umidade)
+barplot(counts, main="Umidade", xlab="Umidade")
+#Aparencia
+counts = table(dados$Aparencia)
+barplot(counts, main="Aparencia", xlab="Aparencia")
+#vento
+counts = table(dados$Vento)
+barplot(counts, main="Vento", xlab="Vento")
+#Jogar
+counts = table(dados$Jogar)
+barplot(counts, main="Jogar", xlab="Jogar")
+```
+Explorar, colunas númericas
+```{r}
+#Temperatura
+summary(dados$Temperatura)
+boxplot(dados$Temperatura)
+hist(dados$Temperatura)
+#Umidade
+summary(dados$Umidade)
+boxplot(dados$Umidade)
+hist(dados$Umidade)
+```
+Valores - Faltantes - Nas
+```{r}
+#valores faltantes - Nas
+dados[!complete.cases(dados),]
+```
+ Falta de padronização em Vento
+```{r}
+unique(dados$Vento)
+summary(dados$Vento)
+dados[is.na(dados$Vento),]
+dados[!dados$Vento %in% c("FALSO", "VERDADEIRO"),]$Vento = "FALSO"
+summary(dados$Vento)
+```
+Falta de padronização Umidade
+```{r}
+unique(dados$Umidade)
+summary(dados$Umidade)
+dados[is.na(dados$Umidade),]
+median(dados$Umidade)
+dados[is.na(dados$Umidade),]$Umidade = median(dados$Umidade,na.rm = T)
+```
+
+Limpeza de Dados Inconcistentes Temperatura
+```{r}
+unique(dados$Temperatura)
+summary(dados$Temperatura)
+median(dados$Temperatura)
+dados[dados$Temperatura<0 | dados$Temperatura>200 ,]$Temperatura = median(dados$Temperatura)
+summary(dados$Temperatura)
+```
+Limpeza de dados Inconcistentes Aparencia
+```{r}
+summary(dados$Aparencia)
+unique(dados$Aparencia)
+dados[!dados$Aparencia %in% c("sol", "chuva","nublado"),]$Aparencia = "nublado"
+dados$Aparencia = factor(dados$Aparencia)
+```
+
+
+
+
+
+

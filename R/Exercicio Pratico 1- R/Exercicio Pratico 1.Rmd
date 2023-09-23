@@ -1,0 +1,53 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(datasets)
+```
+
+```{r}
+ana = 8
+paula = 12
+if(ana > paula){
+  print("Ana é mais velha")
+}else{
+  print("Paula é mais velha")
+}
+```
+
+```{r}
+class(BOD)
+```
+
+```{r}
+X = c(1,2,3,4,5,6,7,8,9,10)
+for(X in X){
+if(X%%2==0){
+print(X)
+}}
+
+
+```
+```{r}
+tail(women,10)
+```
+
+```{r}
+plot(iris$Sepal.Width, iris$Petal.Length)[50:100]
+
+```
+```{r}
+A = c(1,2,3)
+B = c(1,2,3)
+D = A+B
+D
+```
+```{r}
+rowname(CO2)
+colnames(CO2)
+nrow(CO2)
+ncol(CO2)
+```
+

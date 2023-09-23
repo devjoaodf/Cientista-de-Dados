@@ -1,0 +1,19 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(lattice)
+library(openxlsx)
+x = read.csv("dados.csv", header=TRUE, sep = ",")
+
+```       
+Excel
+```{r}
+dados = read.csv("dados.csv", header=TRUE, sep=";")
+dados
+aggregate(dados$VALOREMPENHO, by=list(dados$MUNICIPIO), FUN=sum)
+```
+
