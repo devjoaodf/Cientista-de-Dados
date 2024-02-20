@@ -1,0 +1,51 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Testes de  Normalidade
+Repetir o experimento
+
+```{r}
+set.seed(123)
+```
+
+Gera Mil variaveis normalmente distribuidas
+```{r}
+x = rnorm(1000)
+```
+Gráfico QQ
+```{r}
+qqnorm(x)
+#linha
+qqline(x)
+```
+Teste  de  Shapiro
+Valor de p acima de 0,5 , não há indicio para a  não  confirmar a hipótese nula  de  dados normalmente distribuidos
+```{r}
+shapiro.test(x)
+```
+ Histograma com linha de densidade
+```{r}
+hist(x, main="")
+par(new = TRUE)
+plot(density(x),ylab = "", xlab = "", axes = F, lwd = 2.5)
+```
+Dados não normalmente distribuidos
+```{r}
+library(semTools)
+m = mvrnonnorm(1000, c(1, 2), matrix(c(10, 2, 2, 5), 2, 2),
+               skewness = c(5, 2), kurtosis = c(3, 3))
+qqnorm(m)
+qqline(m)
+```
+```{r}
+shapiro.test(m)
+```
+```{r}
+hist(m, main = "")
+par(new = TRUE)
+plot(density(m),ylab = "", xlab = "", axes = F, lwd = 2.5)
+```
+
+

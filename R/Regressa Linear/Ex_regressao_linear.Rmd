@@ -1,0 +1,42 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+Franquia: mostra a franquia anual e o custo da franquia!
+```{r}
+library(corrgram)
+franquia = read.csv("slr12.csv",  sep=";")
+franquia
+dim(franquia)
+```
+Geramos o modelo usando função lm
+queremos prever o custo da franquia anual
+```{r}
+modelo = lm(CusInic ~ FrqAnual, data = franquia)
+modelo
+```
+Visualização da relação entre variáveis e linha de melhor ajuste
+```{r}
+plot(CusInic ~ FrqAnual, data = franquia)
+abline(modelo)
+```
+Podemos fazer uma previsão usando diretamente os  coeficientes
+com o custo inicial de 3000 quanto será a franquia Anual
+```{r}
+modelo$coefficients
+modelo$coefficients[1] + modelo$coefficients[2] * 3000
+```
+Usando Predict
+```{r}
+predict(modelo,data.frame(CusInic = 3000))
+```
+Analisando melhor o modelo
+```{r}
+summary(modelo)
+modelo$coefficients
+modelo$residuals
+hist(modelo$residuals)
+modelo$fitted.values
+plot(modelo$fitted.values, franquia$CusInic)
+```
+
